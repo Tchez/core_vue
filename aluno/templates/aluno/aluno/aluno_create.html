@@ -209,7 +209,7 @@ Caso deseje bloquear o parser nesse arquivo, basta adicionar o caracter #(cerqui
                                                 addCssClass: 'br-button primary',
                                             });
                                         </script>
-                                    {% endif %}                                    
+                                    {% endif %}
                                 {% endblock extra_js %}
                             </div>
                         {% endfor %}
@@ -248,84 +248,83 @@ Caso deseje bloquear o parser nesse arquivo, basta adicionar o caracter #(cerqui
         </div>
     {% endblock form_app %}
 </div>
-
 {% block modal %}
-{% if form.curso.field.queryset.model|has_add_permission:request %}
-    {# MODAL Curso #}
-    <div class="modal fade"
-            id="formCursoModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="myLargeModalLabel"
-            aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myLargeModalLabel">Adicionar Curso</h5>
-                    <button type="button"
-                            class="close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close">
-                        <span aria-hidden="true" class="fas fa-times"></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="post"
-                            id="form-curso"
-                            novalidate
-                            class="needs-validation was-validated">
-                        {% csrf_token %}
-                        {% for hidden in form_curso.hidden_fields %}{{ hidden }}{% endfor %}
-                        {% for field in form_curso.visible_fields %}
-                            <div class="form-group">
-                                {% if field.field.widget.input_type == 'checkbox' %}
-                                    <div class="br-switch icon top mr-5">{{ field }} {{ field.label_tag }}</div>
-                                {% else %}
-                                    {{ field.label_tag }} {{ field }}
-                                {% endif %}
-                                {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
-                                {% if field.field.required %}<div class="invalid-feedback">Campo Obrigatorio.</div>{% endif %}
-                                {% if field.errors %}{{ field.errors }}{% endif %}
-                            </div>
-                        {% endfor %}
-                    </form>
-                </div>
-                <div class="modal-footer flex-buttons-end gap-small">
-                    <div>
-                        <button type="button" class="br-button block" data-bs-dismiss="modal">Fechar</button>
+    {% if form.curso.field.queryset.model|has_add_permission:request %}
+        {# MODAL Curso #}
+        <div class="modal fade"
+             id="formCursoModal"
+             tabindex="-1"
+             role="dialog"
+             aria-labelledby="myLargeModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myLargeModalLabel">Adicionar Curso</h5>
+                        <button type="button"
+                                class="close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true" class="fas fa-times"></span>
+                        </button>
                     </div>
-                    <div>
-                        <button type="button" class="br-button primary block" id="btn-gravar-curso">Salvar</button>
+                    <div class="modal-body">
+                        <form method="post"
+                              id="form-curso"
+                              novalidate
+                              class="needs-validation was-validated">
+                            {% csrf_token %}
+                            {% for hidden in form_curso.hidden_fields %}{{ hidden }}{% endfor %}
+                            {% for field in form_curso.visible_fields %}
+                                <div class="form-group">
+                                    {% if field.field.widget.input_type == 'checkbox' %}
+                                        <div class="br-switch icon top mr-5">{{ field }} {{ field.label_tag }}</div>
+                                    {% else %}
+                                        {{ field.label_tag }} {{ field }}
+                                    {% endif %}
+                                    {% if field.help_text %}<small class="form-text text-muted">{{ field.help_text }}</small>{% endif %}
+                                    {% if field.field.required %}<div class="invalid-feedback">Campo Obrigatorio.</div>{% endif %}
+                                    {% if field.errors %}{{ field.errors }}{% endif %}
+                                </div>
+                            {% endfor %}
+                        </form>
+                    </div>
+                    <div class="modal-footer flex-buttons-end gap-small">
+                        <div>
+                            <button type="button" class="br-button block" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                        <div>
+                            <button type="button" class="br-button primary block" id="btn-gravar-curso">Salvar</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>            
-{% endif %}
-<script>    
-    $("#btn-gravar-curso").on("click", function(event) {
-        event.preventDefault();
-        console.log("Entrou")
-        var url = window.location.href;
-        $.ajax({
-            url: '/aluno/api/v1/curso/',
-            method: 'POST',
-            data: $("#form-curso").serialize(),
-            dataType: 'json',
-            success: function(data) {
-                // Adicionando o item retornado no select.
-                $("#id_curso").load(url + " #id_curso option");
-                // Ocultando o form.
-                $("#formCursoModal").hide();
-                $(".modal-backdrop").hide();
-                $("body").removeClass("modal-open");
-                //Limpar o form do modal
-                $('#form-curso').trigger("reset");
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        })
-    });
-</script>
+    {% endif %}
+    <script>
+        $("#btn-gravar-curso").on("click", function(event) {
+            event.preventDefault();
+            console.log("Entrou")
+            var url = window.location.href;
+            $.ajax({
+                url: '/aluno/api/v1/curso/',
+                method: 'POST',
+                data: $("#form-curso").serialize(),
+                dataType: 'json',
+                success: function(data) {
+                    // Adicionando o item retornado no select.
+                    $("#id_curso").load(url + " #id_curso option");
+                    // Ocultando o form.
+                    $("#formCursoModal").hide();
+                    $(".modal-backdrop").hide();
+                    $("body").removeClass("modal-open");
+                    //Limpar o form do modal
+                    $('#form-curso').trigger("reset");
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            })
+        });
+    </script>
 {% endblock modal %}

@@ -1,7 +1,7 @@
 <!--
 Arquivo gerado automaticamente pelo build.
 Caso deseje bloquear o parser nesse arquivo, basta adicionar o caracter #(cerquilha) antes da palavra a seguir
-FileLocked
+#FileLocked
 -->
 {% extends "core/index_list.html" %}
 {% load base %}
@@ -21,7 +21,6 @@ FileLocked
             <tr>
                 <th class="table-actions" scope="col">Ações</th>
                 <th></th>
-                <!--REPLACE_THEAD-->
                 <th scope="col" class="table-delete"></th>
             </tr>
         </thead>
@@ -49,7 +48,6 @@ FileLocked
                         {% endif %}
                     </td>
                     <td></td>
-                    <!--REPLACE_TLINE-->
                     <td class="text-center">
                         {% if perms.aluno.delete_curso %}
                             {% if item.deleted %}
