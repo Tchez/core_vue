@@ -45,6 +45,7 @@ urlpatterns = [
     path("core/", include("usuario.urls", namespace="usuario")),
     path("core/", include("configuracao_core.urls", namespace="configuracao_core")),
     path("core/", include("aluno.urls", namespace="aluno")),
+    path("core/", include("contato.urls", namespace="contato")),
     # Urls do Swagger
     path(
         "swagger/",

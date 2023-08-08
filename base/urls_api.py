@@ -13,4 +13,5 @@ urlpatterns = [
     path('usuario/api/v1/', include('usuario.api.api_urls')),
     path('configuracao_core/api/v1/', include('configuracao_core.api.api_urls')),
     path('aluno/api/v1/', include('aluno.api.api_urls')),
+    path('contato/api/v1/', include('contato.api.api_urls')),
 ]

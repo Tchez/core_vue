@@ -1,6 +1,7 @@
 from django.db import models
-from core.models import Base
+
 from aluno.models import Aluno
+from core.models import Base
 
 
 class Contato(Base):
