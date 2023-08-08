@@ -65,8 +65,12 @@
                               <div class="layout-content">
                                     <div class="container flex-grow-1 container-p-y">
                                           {% include "./block/bread_cumbs.html" %}
-                                          {% block content %}
-                                          {% endblock content %}
+                                          <div id="app">
+                                                {% block content %}
+                                                {% endblock content %}                                                
+                                          </div>
+                                          {% block modal %}
+                                          {% endblock modal %}
                                     </div>
                                     <nav class="layout-footer footer bg-footer-theme">
                                           {% include "./block/footer.html" %}
@@ -132,7 +136,11 @@
         ga('send', 'pageview');
             </script>
             <!-- Fim do Google Analytics -->
+            <!-- Vue.js -->
+            <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
             {% block extra_js %}
             {% endblock extra_js %}
       </body>
 </html>
+
+<script src="{% static 'core/vue/vue.js' %}"></script>
