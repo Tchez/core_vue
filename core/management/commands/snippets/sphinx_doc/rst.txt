@@ -1,0 +1,14 @@
+$App$
+==============================================
+
+Forms
+-----------------------
+
+.. automodule:: $app$.forms
+    :members:
+
+Models
+------------------------
+
+.. automodule:: $app$.models
+    :members:

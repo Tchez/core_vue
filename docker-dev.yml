@@ -1,0 +1,70 @@
+version: "3.7"
+
+networks:
+    core_vue_network:
+      name: core_vue_network
+
+services:
+  database_core_vue:
+    container_name: core_vue_database
+    image: postgres:14.3
+    restart: always
+    volumes:
+      - core_vue_db:/var/lib/postgresql/data
+    environment:
+      - LC_ALL=C.UTF-8
+      - POSTGRES_DB=core_vue_db
+      - POSTGRES_USER=core_vue_dbmanager_2LiyBoLHeHo5yG
+      - POSTGRES_PASSWORD=2LiyBoLHeHo5yGfxan8euHGIzEEzIs
+      - POSTGRES_HOST_AUTH_METHOD=md5
+    networks:
+      - core_vue_network
+    ports:
+      - "5432:5432"
+
+  django_core_vue:
+    container_name: core_vue_django
+    image: core_vue:1.0
+    platform: linux/amd64
+    environment:
+      - DB_NAME=core_vue_db
+      - DB_HOST=core_vue_database
+      - DB_PASSWORD=2LiyBoLHeHo5yGfxan8euHGIzEEzIs
+      - DB_ENGINE=django.db.backends.postgresql
+      - DB_USER=core_vue_dbmanager_2LiyBoLHeHo5yG
+      - DB_PORT=5432
+      - SECRET_KEY=NYPmGeU11uQ96YQtX9UjOZ_EuAGsuJltGJt5XBrXt0HQhgShCP7KIWlLFgxtZDhl0z4
+      - ALLOWED_HOSTS=.localhost,*
+      - DEBUG=True
+      - SENTRY_DNS=""
+      - API_PATH=http://localhost:8080/
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - EMAIL_PASSWORD=''
+      - EMAIL_LOGIN=''
+      - EMAIL_SMTP=''
+      - EMAIL_PORTA=''
+      - EMAIL_DESTINO=''
+      - FCM_KEY=''
+      - GOOGLE_API_KEY=''
+      - HORAS_SEM_ATENDIMENTO=19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7, 12
+      - DIAS_DA_SEMANA=0, 1, 2, 3, 4
+      - SENHA_PADRAO=123456
+      - CSRF_TRUSTED_ORIGINS=https://*.localhost,
+    build:
+      context: .
+      dockerfile: ./DockerfileDev
+    networks:
+      - core_vue_network
+    command: bash -c "python manage.py collectstatic; python manage.py runserver 0.0.0.0:8000;"
+    volumes:
+      - .:/app
+      - ../../FastAPI/core_vue:/FastAPI
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database_core_vue
+
+volumes:
+    core_vue_db:
+
