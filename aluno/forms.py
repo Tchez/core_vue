@@ -1,6 +1,10 @@
 from core.forms import BaseForm
 
+from django.forms import inlineformset_factory
+
 from .models import Aluno, Curso
+from contato.models import Contato
+from contato.forms import ContatoForm
 
 
 class CursoForm(BaseForm):
@@ -17,3 +21,6 @@ class AlunoForm(BaseForm):
     class Meta:
         exclude = ["deleted", "enabled"]
         model = Aluno
+
+
+ContatoFormSet = inlineformset_factory(Aluno, Contato, form=ContatoForm, extra=1)

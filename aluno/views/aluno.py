@@ -1,4 +1,4 @@
-from aluno.forms import AlunoForm, CursoForm
+from aluno.forms import AlunoForm, CursoForm, ContatoFormSet
 from aluno.models import Aluno
 from core.views.base import (
     BaseCreateView,
@@ -8,6 +8,7 @@ from core.views.base import (
     BaseRestoreView,
     BaseUpdateView,
 )
+from contato.models import Contato
 
 
 # Views do Models Aluno
@@ -62,7 +63,9 @@ class AlunoCreateView(BaseCreateView):
     context_object_name = "aluno"
     success_url = "aluno:aluno-list"
     template_name = "aluno/aluno/aluno_create.html"
-    # inlines = []
+    inlines = [
+        ContatoFormSet,
+    ]
 
     def get_context_data(self, **kwargs):
         context = super(AlunoCreateView, self).get_context_data(**kwargs)
