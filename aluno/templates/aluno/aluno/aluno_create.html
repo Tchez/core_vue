@@ -199,8 +199,8 @@ Caso deseje bloquear o parser nesse arquivo, basta adicionar o caracter #(cerqui
                                 </div>
                                 {% block extra_js %}
                                     {% if list_inlines and formset %}
-                                        <script src="{% static 'core/js/jquery.formset.js' %}"></script>
-                                        <script type="application/javascript">
+                                        <script-import src="{% static 'core/js/jquery.formset.js' %}"></script-import>
+                                        <script-import type="application/javascript">
                                             $(".{{ formset.prefix }}").formset({
                                                 addText: 'Adicionar outro {{ formset.model.get_meta.verbose_name }}',
                                                 deleteText: 'Remover {{ formset.model.get_meta.verbose_name }}',
@@ -208,7 +208,7 @@ Caso deseje bloquear o parser nesse arquivo, basta adicionar o caracter #(cerqui
                                                 deleteCssClass: 'br-button danger',
                                                 addCssClass: 'br-button primary',
                                             });
-                                        </script>
+                                        </script-import>
                                     {% endif %}
                                 {% endblock extra_js %}
                             </div>
