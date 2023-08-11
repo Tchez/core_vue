@@ -12,6 +12,14 @@ class Curso(Base):
     def __str__(self):
         return self.nome
 
+    class Meta:
+        verbose_name = "Curso"
+        verbose_name_plural = "Cursos"
+        fields_display = [
+            "nome",
+            "descricao",
+        ]
+
 
 class Aluno(Base):
     nome = models.CharField("Nome", max_length=100)
