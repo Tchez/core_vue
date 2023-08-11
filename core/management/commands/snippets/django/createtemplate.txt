@@ -187,6 +187,6 @@ FileLocked
         </div>
       </form>
     </div>
-    <!--REPLACE_MODAL_HTML-->
   {% endblock form_app %}
 </div>
+<!--REPLACE_MODAL_HTML-->

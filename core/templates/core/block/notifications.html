@@ -1,5 +1,5 @@
 {% if messages %}
   {% for message in messages %}
-    <my-alert type="{{ message.tags }}" message="{{ message|safe }}"></my-alert>
+    <message-vue type="{{ message.tags }}" message="{{ message|safe }}"></message-vue>
   {% endfor %}
 {% endif %}

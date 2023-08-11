@@ -67,7 +67,7 @@
                                           {% include "./block/bread_cumbs.html" %}
                                           <div id="app">
                                                 {% block content %}
-                                                {% endblock content %}                                                
+                                                {% endblock content %}
                                           </div>
                                           {% block modal %}
                                           {% endblock modal %}
@@ -119,6 +119,8 @@
                   <!-- Desenvolvimento -->
                   <script src="{% static 'core/js/desenvolvimento.js' %}"></script>
             {% endif %}
+            <!-- CDN Vue.js -->
+            <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
             <!-- Google Analytics -->
             <script>
         (function (i, s, o, g, r, a, m) {
@@ -136,8 +138,6 @@
         ga('send', 'pageview');
             </script>
             <!-- Fim do Google Analytics -->
-            <!-- Vue.js -->
-            <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
             {% block extra_js %}
             {% endblock extra_js %}
       </body>

@@ -1,5 +1,5 @@
-import MessageVue from './components/MessageVue.js';
-import TagScriptVue from './components/TagScriptVue.js';
+import Message from './components/Message.js';
+import TagScript from './components/TagScript.js';
 
 const { createApp } = Vue;
 
@@ -13,6 +13,6 @@ const app = createApp({
     },
 });
 
-app.component('message-vue', MessageVue);
-app.component('script-vue', TagScriptVue);
+app.component('message-vue', Message);
+app.component('script-vue', TagScript);
 app.mount('#app');

@@ -165,7 +165,7 @@ Delete (Deletar um novo registro via API)
                 </div>
                 {% block extra_js %}
                   {% if list_inlines and formset %}
-                    <script src="{% static 'core/js/jquery.formset.js' %}"></script>
+                    <script src="{% static 'core/js/jquery.formset.js' %}"></script> 
                     <script type="application/javascript">
                       $(".{{ formset.prefix }}").formset({
                         addText: 'Adicionar outro {{ formset.model.get_meta.verbose_name }}',
@@ -193,6 +193,6 @@ Delete (Deletar um novo registro via API)
         </div>
       </form>
     </div>
-  <!--REPLACE_MODAL_HTML-->
 {% endblock form_app %}
 </div>
+<!--REPLACE_MODAL_HTML-->
