@@ -4,11 +4,11 @@ const { computed, toRefs } = Vue;
  * Componente de alerta para exibir mensagens de sucesso, erro, alerta e informação.
  * 
  * @example
- * <my-alert></my-alert>
- * <my-alert type="success" message="Mensagem de sucesso!"></my-alert>
- * <my-alert type="danger" message="Mensagem de erro!"></my-alert>
- * <my-alert type="warning" message="Mensagem de alerta!"></my-alert>
- * <my-alert type="info" message="Mensagem de informação!"></my-alert>
+ * <message-vue></message-vue>
+ * <message-vue type="success" message="Mensagem de sucesso!"></message-vue>
+ * <message-vue type="danger" message="Mensagem de erro!"></message-vue>
+ * <message-vue type="warning" message="Mensagem de alerta!"></message-vue>
+ * <message-vue type="info" message="Mensagem de informação!"></message-vue>
  */
 export default {        
     props: {

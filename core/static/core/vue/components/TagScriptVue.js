@@ -3,8 +3,8 @@
  *  
  * 
  * @example
- * <script-import src="https://google.com/jsapi"></script-import>
- * <script-import type="text/javascript">alert('Hello World!');</script-import>
+ * <script-vue src="https://google.com/jsapi"></script-vue>
+ * <script-vue type="text/javascript">alert('Hello World!');</script-vue>
  */
 export default {
     props: {

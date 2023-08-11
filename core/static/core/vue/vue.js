@@ -1,5 +1,5 @@
-import MyAlert from './components/MyAlert.js';
-import ScriptImport from './components/ScriptImport.js';
+import MessageVue from './components/MessageVue.js';
+import TagScriptVue from './components/TagScriptVue.js';
 
 const { createApp } = Vue;
 
@@ -13,6 +13,6 @@ const app = createApp({
     },
 });
 
-app.component('my-alert', MyAlert);
-app.component('script-import', ScriptImport);
+app.component('message-vue', MessageVue);
+app.component('script-vue', TagScriptVue);
 app.mount('#app');
