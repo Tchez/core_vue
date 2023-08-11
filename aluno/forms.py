@@ -1,10 +1,10 @@
-from core.forms import BaseForm
-
 from django.forms import inlineformset_factory
 
-from .models import Aluno, Curso
-from contato.models import Contato
 from contato.forms import ContatoForm
+from contato.models import Contato
+from core.forms import BaseForm
+
+from .models import Aluno, Curso
 
 
 class CursoForm(BaseForm):

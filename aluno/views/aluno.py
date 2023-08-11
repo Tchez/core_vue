@@ -1,4 +1,4 @@
-from aluno.forms import AlunoForm, CursoForm, ContatoFormSet
+from aluno.forms import AlunoForm, ContatoFormSet, CursoForm
 from aluno.models import Aluno
 from core.views.base import (
     BaseCreateView,
@@ -8,7 +8,6 @@ from core.views.base import (
     BaseRestoreView,
     BaseUpdateView,
 )
-from contato.models import Contato
 
 
 # Views do Models Aluno
