@@ -20,7 +20,6 @@ Caso deseje bloquear o parser nesse arquivo, basta adicionar o caracter #(cerqui
         <thead>
             <tr>
                 <th class="table-actions" scope="col">Ações</th>
-                <th></th>
                 <th>Nome</th>
                 <th>Idade</th>
                 <th>Matrícula</th>
@@ -52,7 +51,6 @@ Caso deseje bloquear o parser nesse arquivo, basta adicionar o caracter #(cerqui
                             </a>
                         {% endif %}
                     </td>
-                    <td></td>
                     <td>{{ item.nome }}</td>
                     <td>{{ item.pegar_idade_aluno }}</td>
                     <td>{{ item.matricula }}</td>
@@ -83,6 +81,13 @@ Caso deseje bloquear o parser nesse arquivo, basta adicionar o caracter #(cerqui
             {% endfor %}
         </tbody>
     </table>
+
+    <br />
+
+    <list-vue 
+        :items="{{ object_list|safe }}"
+        ></list-vue>
+
 {% endblock list_app %}
 {% block size_itens %}
     Exibindo {{ aluno.count }} de {{ paginator.count }} itens encontrados.
