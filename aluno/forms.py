@@ -19,7 +19,7 @@ class AlunoForm(BaseForm):
     """Form padrão para o model Aluno"""
 
     class Meta:
-        exclude = ["deleted", "enabled"]
+        exclude = ["deleted",]
         model = Aluno
 
 

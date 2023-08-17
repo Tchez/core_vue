@@ -1,5 +1,7 @@
 from aluno.forms import AlunoForm, ContatoFormSet, CursoForm
 from aluno.models import Aluno
+
+from base.elastic import ELASTIC_APM
 from core.views.base import (
     BaseCreateView,
     BaseDeleteView,
@@ -17,11 +19,18 @@ class AlunoListView(BaseListView):
     model = Aluno
     template_name = "aluno/aluno/aluno_list.html"
     context_object_name = "aluno"
-    list_display = ["nome", "matricula", "curso", "ativo"]
+    list_display = [
+        "nome",
+        "matricula",
+        "curso",
+        "ativo",
+        "deleted",
+    ]
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(AlunoListView, self).get_context_data(**kwargs)
+        context["server_url"] = ELASTIC_APM["SERVER_URL"]
         return context
 
     def get_queryset(self):
