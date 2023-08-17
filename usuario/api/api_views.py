@@ -2,6 +2,7 @@ from drf_jsonmask.views import OptimizedQuerySetMixin
 from rest_framework import filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
@@ -23,7 +24,7 @@ class UsuarioViewAPI(ModelViewSet):
 
 class UserHasPermissionView(APIView):
     """Endpoint para verificar se o usuário logado possui permissões especificadas.
-    
+
     A URL deve conter o parâmetro 'perms', uma lista de nomes de permissões separados por vírgula.
     Retorna um dicionário com cada permissão e um booleano indicando se o usuário possui essa permissão.
     """
@@ -33,27 +34,43 @@ class UserHasPermissionView(APIView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        permissions_to_check = request.query_params.get("perms", "")
+        permissions_to_check = self._get_permissions_from_request(request)
 
+        # verifica se a lista de permissões está vazia
         if not permissions_to_check:
-            return Response(
-                {
-                    "detail": "Nenhuma permissão foi informada. Informe uma ou mais permissões separadas por vírgula!",
-                    "example": "/usuario/api/v1/permissions/?perms=app_name.permission_name,app_name.permission_name",
-                },
-                status=400,
-            )
-
-        permissions_to_check = permissions_to_check.split(",")
+            return self._missing_permission_response()
 
         if user.is_superuser:
             return Response({permission: True for permission in permissions_to_check})
 
-        has_permissions = {
+        return Response(self._check_user_permissions(user, permissions_to_check))
+
+    def _get_permissions_from_request(self, request) -> list:
+        """
+        Extrai as permissões dos parâmetros de consulta da solicitação.
+        """
+        params = request.query_params.get("perms", "")
+        return params.split(",") if params else []
+
+    def _missing_permission_response(self):
+        """
+        Resposta quando o parâmetro 'perms' não é fornecido na solicitação.
+        """
+        return Response(
+            {
+                "detail": "Nenhuma permissão foi informada. Informe uma ou mais permissões separadas por vírgula!",
+                "example": "/usuario/api/v1/permissions/?perms=app_name.permission_name,app_name.permission_name",
+            },
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    def _check_user_permissions(self, user, permissions_to_check):
+        """
+        Check which permissions the user has from the provided list.
+        """
+        return {
             permission: user.has_perm(permission) for permission in permissions_to_check
         }
-
-        return Response(has_permissions)
 
 
 class UsuarioCustomViewAPI(OptimizedQuerySetMixin, ReadOnlyModelViewSet):

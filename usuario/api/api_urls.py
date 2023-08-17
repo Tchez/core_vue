@@ -1,6 +1,7 @@
 from rest_framework import routers
+from django.urls import path
 
-from .api_views import UsuarioCustomViewAPI, UsuarioViewAPI
+from .api_views import UsuarioCustomViewAPI, UsuarioViewAPI, UserHasPermissionView
 
 router = routers.DefaultRouter()
 
@@ -8,4 +9,10 @@ router = routers.DefaultRouter()
 router.register(r"usuario", UsuarioViewAPI, "usuario-api")
 router.register(r"usuario/custom", UsuarioCustomViewAPI, "usuario-get-api")
 
-urlpatterns = router.urls
+# Definir views baseadas em APIView manualmente
+urlpatterns = [
+    path("permissions/", UserHasPermissionView.as_view(), name="user-permissions"),
+]
+
+# Adicionar as URLs registradas pelo router
+urlpatterns += router.urls
