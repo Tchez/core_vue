@@ -82,6 +82,46 @@ export default {
             });
         });
 
+
+        /**
+         * Retorna a URL para a página de detalhamento de um item.
+         * 
+         * @param {Number} pk - O ID primário do item a ser visualizado.
+         */
+        const getDetailUrl = (pk) => {
+            return `${props.server_url}/core/aluno/aluno/${pk}/`;
+        }
+
+
+        /**
+         * Retorna a URL para a página de edição de um item.
+         * 
+         * @param {Number} pk - O ID primário do item a ser editado.
+         */
+        const getUpdateUrl = (pk) => {
+            return `${props.server_url}/core/aluno/aluno/update/${pk}/`;
+        }
+
+
+        /**
+         * Retorna a URL para a página de exclusão de um item.
+         * 
+         * @param {Number} pk - O ID primário do item a ser excluído.
+         */
+        const getDeleteUrl = (pk) => {
+            return `${props.server_url}/core/aluno/aluno/delete/${pk}/`;
+        }
+
+
+        /**
+         * Retorna a URL para a página de restauração de um item.
+         * @param {Number} pk - O ID primário do item a ser restaurado.
+         */
+        const getRestoreUrl = (pk) => {
+            return `${props.server_url}/core/aluno/aluno/restore/${pk}/`;
+        }
+
+
         onMounted(fetchPermissions);
 
         return {
@@ -89,7 +129,11 @@ export default {
             userCanView: computed(() => checkPermission(`${props.app_name}.view_aluno`)),
             userCanChange: computed(() => checkPermission(`${props.app_name}.change_aluno`)),
             fieldsToRender,
-            listToRender
+            listToRender,
+            getDetailUrl,
+            getUpdateUrl,
+            getDeleteUrl,
+            getRestoreUrl,
         };
     },
 
@@ -107,14 +151,14 @@ export default {
                 <tr v-for="(renderedItem, index) in listToRender" 
                     :class="{ 'deleted': items[index].deleted === 'True' }">
                     <td class="text-center">
-                        <a v-if="userCanView" href="#"
+                        <a v-if="userCanView" :href="getDetailUrl(items[index].pk)"
                         class="br-button circle primary small m-1"
                         data-toggle="tooltip"
                         data-placement="bottom"
                         title="Visualizar">
                             <i class="fas fa-eye fa-sm"></i>
                         </a>
-                        <a v-if="userCanChange" href="#"
+                        <a v-if="userCanChange" :href="getUpdateUrl(items[index].pk)"
                         class="br-button secondary circle small m-1"
                         data-toggle="tooltip"
                         data-placement="bottom"
@@ -128,7 +172,7 @@ export default {
                     <td class="text-center">
                         <div v-if="userCanDelete">
                             <div v-if="items[index].deleted === 'True'">
-                                <a href="#"
+                                <a :href="getRestoreUrl(items[index].pk)"
                                     class="br-button circle small text-success"
                                     data-toggle="tooltip"
                                     data-placement="bottom"
@@ -138,7 +182,7 @@ export default {
                             </div>
                         
                             <div v-else>
-                                <a href="#"
+                                <a :href="getDeleteUrl(items[index].pk)"
                                     class="br-button circle small text-danger"
                                     data-toggle="tooltip"
                                     data-placement="bottom"
