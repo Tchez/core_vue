@@ -9,6 +9,7 @@ from aluno.models import Aluno, Curso
 
 from .serializers import (
     AlunoGETSerializer,
+    AlunoListSerializer,
     AlunoSerializer,
     CursoGETSerializer,
     CursoSerializer,
@@ -52,6 +53,13 @@ class AlunoViewAPI(ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Aluno.objects.select_related().all()
     serializer_class = AlunoSerializer
+
+
+class AlunoListViewAPI(ModelViewSet):
+    authentication_classes = [JWTAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = Aluno.objects_all.select_related('curso').all()
+    serializer_class = AlunoListSerializer
 
 
 class AlunoCustomViewAPI(OptimizedQuerySetMixin, ReadOnlyModelViewSet):

@@ -2,6 +2,7 @@ from rest_framework import routers
 
 from .api_views import (
     AlunoCustomViewAPI,
+    AlunoListViewAPI,
     AlunoViewAPI,
     CursoCustomViewAPI,
     CursoViewAPI,
@@ -16,6 +17,7 @@ router.register(r"curso/custom", CursoCustomViewAPI, "curso-get-api")
 
 # URL para a API Aluno
 router.register(r"aluno", AlunoViewAPI, "aluno-api")
+router.register(r"listagem/aluno", AlunoListViewAPI, "aluno-list")
 router.register(r"aluno/custom", AlunoCustomViewAPI, "aluno-get-api")
 
 urlpatterns = router.urls
