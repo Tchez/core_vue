@@ -87,9 +87,10 @@ Caso deseje bloquear o parser nesse arquivo, basta adicionar o caracter #(cerqui
     <br />
 
     <list-vue
-        :items="{{ object_list|safe }}"
-        server_url="{{  server_url  }}"
-        app_name="aluno"
+        app_name="aluno" 
+        model_name="aluno"
+        endpoint="/aluno/api/v1/listagem/aluno/"
+        :fields="['nome', 'idade', 'matricula', 'curso', 'ativo']"
     ></list-vue>
 
 {% endblock list_app %}
