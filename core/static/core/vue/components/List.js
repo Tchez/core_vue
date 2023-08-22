@@ -64,7 +64,7 @@ export default {
          * Faz a requisição à API para buscar os itens a serem renderizados.
          */
         const fetchItems = async () => {
-            const baseEndpoint = `${window.location.origin}/${props.app_name}/api/v1/listagem/${props.model_name}/`;
+            const baseEndpoint = `${window.location.origin}/${props.app_name}/api/v1/${props.model_name}/`;
             const url = props.endpoint || baseEndpoint;
 
             try {
@@ -259,5 +259,11 @@ export default {
                 </table>
             </div>
         </div>
+
+        <modal-vue
+            :show="selectedItemToDelete !== null"
+            @confirm="deleteItem"
+            @close="selectedItemToDelete = null">
+        </modal-vue>
     `
 };
