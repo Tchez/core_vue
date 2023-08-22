@@ -259,11 +259,5 @@ export default {
                 </table>
             </div>
         </div>
-
-        <modal-vue
-            :show="selectedItemToDelete !== null"
-            @confirm="deleteItem"
-            @close="selectedItemToDelete = null">
-        </modal-vue>
     `
 };
